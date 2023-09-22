@@ -1,17 +1,22 @@
 import { ColumnsType } from 'antd/es/table';
 import { useEffect, useState } from 'react';
-import { CategoryList, CategoryList as CategoryListComponent } from '../../components'
+import { CategoryList as CategoryListComponent } from '../../components'
 import { Category, GetCategoryResponse } from '../../types';
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom';
 
-const ProductList = () => {
+const CategoryList = () => {
 
     const [categorys, setCategorys] = useState<Category[]>([]);
     const navigate = useNavigate();
 
+    const handleLogOut = () => {
+        localStorage.removeItem('authToken')
+        navigate('/login');
+      } 
+
     const getCategoryList = async () => {
-        const fetching = await fetch('https://mock-api.arikmpt.com/api/category?page=1&name=mock category')
+        const fetching = await fetch('https://mock-api.arikmpt.com/api/category')
         const response: GetCategoryResponse = await fetching.json();
         setCategorys(response.categorys ?? []);
     }
@@ -50,7 +55,7 @@ const ProductList = () => {
             key: 'id',        
         },
         {
-            title: 'Username',
+            title: 'Name',
             dataIndex: 'title',
             key: 'title',        
         },
@@ -76,6 +81,8 @@ const ProductList = () => {
         <>
             <h3>Daftar Category</h3>
             <Button type={'primary'} onClick={() => navigate('/category/new')}>Tambah Category Baru</Button>
+            {/*<Button type={'primary'} onClick={() => navigate('/logout')}>Logout</Button>*/}
+            <Button type={'primary'} onClick={handleLogOut} danger>Log Out</Button>
             <CategoryListComponent columns={columns} data={categorys}/>
         </>
     )

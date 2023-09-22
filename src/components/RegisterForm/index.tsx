@@ -2,12 +2,15 @@ import { Button, Card, Input, Typography } from "antd"
 import { useFormik } from "formik"
 import { RegisterForm as RegisterFormProps } from "../../types"
 import { initialValues, validationSchema } from "./registerFormSchema"
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
     onSubmit: (values: RegisterFormProps) => void
 }
 
 const RegisterForm = ({ onSubmit } : Props) => {
+
+    const navigate = useNavigate();
 
     const handleSubmit = (values: RegisterFormProps) => {
         onSubmit(values)
@@ -58,6 +61,7 @@ const RegisterForm = ({ onSubmit } : Props) => {
                     )}
                 </div>
                 <Button type={'primary'} htmlType={"submit"}>Submit</Button>
+                <Button type={'primary'} onClick={() => navigate('/login')}>Login</Button>
             </form>
         </Card>
     )

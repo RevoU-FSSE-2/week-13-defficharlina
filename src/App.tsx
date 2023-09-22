@@ -1,8 +1,8 @@
 import AppProvider from './Provider/AppProvider'
 // import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Login, Register, Category, CategoryEdit, CategoryNew } from './pages'
-import { PublicLayout } from './layouts'
+import { Home, Category, CategoryEdit, CategoryNew, Login, Register } from './pages'
+import { PublicLayout, AnotherLayout } from './layouts'
 
 function App() {
 
@@ -12,31 +12,43 @@ function App() {
       children: [
         {
           path: '/',
+          element: <Home />
+        },
+        {
+          path: '/category',
+          element: <Category />
+        },
+        /*{
+          path: '/product/:id',
+          element: <ProductDetail />
+        },*/
+        {
+          path: '/category/new',
+          element: <CategoryNew />
+        },
+        {
+          path: '/category/edit/:id',
+          element: <CategoryEdit />
+        },
+        /*{
+          path: '/profile',
+          element: <Profile />
+        }*/
+      ]
+    },
+    {
+      element: <AnotherLayout />,
+      children: [
+        {
+          path: '/login',
           element: <Login />
         },
         {
           path: '/register',
           element: <Register />
-        },
-        {
-          path: '/category/:id',
-          element: <Category />
-        },
+        }
       ]
     }
-  /*  {
-      element: <AnotherLayout />,
-      children: [
-        {
-          path: '/login',
-          element: <>login page</>
-        },
-        {
-          path: '/register',
-          element: <>register page</>
-        }
-      ] 
-    } */
   ])
 
   return (
@@ -59,6 +71,3 @@ function App() {
 }
 
 export default App
-
-
-

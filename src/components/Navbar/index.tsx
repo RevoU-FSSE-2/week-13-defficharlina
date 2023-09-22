@@ -7,10 +7,10 @@ const items: MenuProps['items'] = [
         label: 'Home',
         key: '/'
     },
-    /*{
+    {
         label: 'Category',
         key: '/category'
-    },*/
+    },
 ]
 
 const Navbar = () => {

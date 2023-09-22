@@ -8,7 +8,7 @@ const User = () => {
     
     const fetchUser = useCallback(
         async () => {
-            const fetching = await fetch('https://dummyjson.com/users/1')
+            const fetching = await fetch('https://mock-api.arikmpt.com/api/user/1')
             const response = await fetching.json()
             setUser?.(response)
         },
@@ -24,7 +24,7 @@ const User = () => {
 
     return (
         <div>
-            <p>Username: {user?.firstName} </p>
+            <p>Username: {user?.username} </p>
             <p>Email: {user?.email}</p>
         </div>
     )
