@@ -12,7 +12,7 @@ const CategoryEdit = () => {
 
     const getCategory = useCallback(
         async () => {
-            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category?page=1&name=mock category${id}`)
+            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`)
             const response: Category = await fetching.json();
     
             setCategory(response)
@@ -29,7 +29,7 @@ const CategoryEdit = () => {
 
     const onSubmit = async (values: CategoryFormProps) => {
         try {
-            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category?page=1&name=mock category${id}`, {
+            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/update${id}`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json' 

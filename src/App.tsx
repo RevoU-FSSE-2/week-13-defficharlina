@@ -12,6 +12,19 @@ function App() {
       children: [
         {
           path: '/',
+          element: <Login />
+        },
+        {
+          path: '/register',
+          element: <Register />
+        }
+      ]
+    },
+    {
+      element: <AnotherLayout />,
+      children: [
+        {
+          path: '/home',
           element: <Home />
         },
         {
@@ -34,19 +47,6 @@ function App() {
           path: '/profile',
           element: <Profile />
         }*/
-      ]
-    },
-    {
-      element: <AnotherLayout />,
-      children: [
-        {
-          path: '/login',
-          element: <Login />
-        },
-        {
-          path: '/register',
-          element: <Register />
-        }
       ]
     }
   ])

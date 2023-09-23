@@ -61,7 +61,7 @@ const RegisterForm = ({ onSubmit } : Props) => {
                     )}
                 </div>
                 <Button type={'primary'} htmlType={"submit"}>Submit</Button>
-                <Button type={'primary'} onClick={() => navigate('/login')}>Login</Button>
+                <Button type={'primary'} onClick={() => navigate('/')}>Login</Button>
             </form>
         </Card>
     )

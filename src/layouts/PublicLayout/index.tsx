@@ -21,9 +21,9 @@ const PublicLayout = () => {
     //if(isAuth) {
         return (
             <div>
-                <Navbar />
+                {/*<Navbar />*/}
                 <Outlet />
-                <div>Footer</div>
+                {/*<div>Footer</div>*/}
             </div>
         )
    // }

@@ -10,16 +10,25 @@ const CategoryList = () => {
     const [categorys, setCategorys] = useState<Category[]>([]);
     const navigate = useNavigate();
 
+
+    const token = localStorage.getItem('authToken')
+    console.log("Auth Token:", token)
     const handleLogOut = () => {
         localStorage.removeItem('authToken')
-        navigate('/login');
+        navigate('/');
       } 
 
+
     const getCategoryList = async () => {
-        const fetching = await fetch('https://mock-api.arikmpt.com/api/category')
+        const fetching = await fetch('https://mock-api.arikmpt.com/api/category', {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
         const response: GetCategoryResponse = await fetching.json();
         setCategorys(response.categorys ?? []);
-    }
+    };
 
     useEffect(
         () => {
@@ -30,23 +39,35 @@ const CategoryList = () => {
 
     const removeCategory = async (id: number) => {
         try {
-            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, {
-                method: 'DELETE'
-            })
+            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, 
+            {
+                method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-            const response = await fetching.json()
+            //const response = await fetching.json()
 
-            if(response) {
+            //if(response) {
                 //cara pertama panggil api lagi
                 // getProductList()
 
                 //cara kedua
-                setCategorys((categorys) => categorys.filter((category) => category.id !== id))
-            }
+                //setCategorys((categorys) => categorys.filter((category) => category.id !== id))
+            //}
+
+            if (fetching.ok) {
+                // Check if the request was successful (status code 204 No Content)
+                setCategorys((categorys) =>
+                  categorys.filter((category) => category.id !== id)
+                );
+              }
         } catch (error) {
-            alert(error)
+            alert(error);
         }
-    }
+    };
 
     const columns: ColumnsType<Category> = [
         {
@@ -63,6 +84,7 @@ const CategoryList = () => {
             title: 'Status',
             dataIndex: 'status',
             key: 'status',
+            //render: (is_active: boolean) => (is_active ? "Active" : "Deactive"),
         },
         {
             title: 'Action',
