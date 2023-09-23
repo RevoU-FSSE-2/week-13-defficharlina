@@ -1,8 +1,8 @@
 export interface GetCategoryResponse {
     categorys: Category[];
-    total: number;
-    skip: number;
-    limit: number;
+    current_page: number;
+    total_item: number;
+    total_page: number;
 }
 
 export interface Category {
