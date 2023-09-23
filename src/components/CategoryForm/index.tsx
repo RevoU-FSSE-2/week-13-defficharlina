@@ -25,25 +25,37 @@ const CategoryForm = ({ onSubmit, category } : Props) => {
             <form onSubmit={formMik.handleSubmit}>
                 <div>
                     <Typography.Paragraph>{'Name'}</Typography.Paragraph>
-                    <Input name={'title'}
-                        value={formMik.values.title} 
-                        onChange={formMik.handleChange('title')}
-                        status={formMik.errors.title && 'error'}
+                    <Input name={'name'}
+                        value={formMik.values.name} 
+                        onChange={formMik.handleChange('name')}
+                        status={formMik.errors.name && 'error'}
                     />
-                    {formMik.errors.title && (
-                        <Typography.Paragraph>{formMik.errors.title}</Typography.Paragraph>
+                    {formMik.errors.name && (
+                        <Typography.Paragraph>{formMik.errors.name}</Typography.Paragraph>
                     )}
                 </div>
+
                 <div>
-                <Typography.Paragraph>{'Status'}</Typography.Paragraph>
+                <Typography.Paragraph>{"Status"}</Typography.Paragraph>
                 <Select
-                    value={formMik.values.status ? 'true' : 'false'} // Mengonversi nilai boolean ke string
-                    onChange={(value) => formMik.setFieldValue('status', value === 'true')} // Mengonversi kembali ke boolean
-                    className={formMik.errors.status ? 'error' : ''}
-                >
-                    <Select.Option value="true">Active</Select.Option>
-                    <Select.Option value="false">Inactive</Select.Option>
-                </Select>
+                    value={formMik.values.is_active}
+                    onChange={(value) => formMik.setFieldValue("is_active", value)}
+                    options={[
+                    {
+                        value: true,
+                        label: "Active",
+                    },
+                    {
+                        value: false,
+                        label: "Deactive",
+                    },
+                    ]}
+                ></Select>
+                {formMik.errors.is_active && (
+                    <Typography.Paragraph style={{ color: "red" }}>
+                    {formMik.errors.is_active}
+                    </Typography.Paragraph>
+                )}
                 </div>
                 <Button type={'primary'} htmlType={"submit"}>Submit</Button>
             </form>

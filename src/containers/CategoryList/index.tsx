@@ -27,6 +27,9 @@ const CategoryList = () => {
             },
           });
         const response: GetCategoryResponse = await fetching.json();
+
+        console.log("API Response:", response); // Tambahkan ini untuk melihat respons API di konsol
+        
         setCategorys(response.categorys ?? []);
     };
 
@@ -37,7 +40,7 @@ const CategoryList = () => {
         []
     )
 
-    const removeCategory = async (id: number) => {
+    const removeCategory = async (id: string) => {
         try {
             const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, 
             {
@@ -77,18 +80,18 @@ const CategoryList = () => {
         },
         {
             title: 'Name',
-            dataIndex: 'title',
-            key: 'title',        
+            dataIndex: 'name',
+            key: 'name',        
         },
         {
             title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-            //render: (is_active: boolean) => (is_active ? "Active" : "Deactive"),
+            dataIndex: 'is_active',
+            key: 'is_active',
+            render: (is_active: boolean) => (is_active ? "Active" : "Deactive"),
         },
         {
             title: 'Action',
-            key: 'action',
+            key: 'edit',
             render: (_, record) => (
               <>
                 {/*<Button type={'default'} onClick={() => navigate(`/category/${record.id}`)}>Detail</Button>*/}

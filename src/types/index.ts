@@ -6,15 +6,18 @@ export interface GetCategoryResponse {
 }
 
 export interface Category {
-    id: number;
-    title: string;
-    status: boolean;
+    //id: number;
+    //title: string;
+    //status: boolean;
+    id: string;
+    name: string;
+    is_active: boolean;
 }
 
 export type CategoryForm = Omit<Category,'id'>
 
 export interface LoginForm {
-    username: string;
+    email: string;
     password: string;
 }
 
@@ -25,13 +28,13 @@ export interface LoginResponse {
 }
 
 export interface RegisterForm {
-    username: string;
+    name: string;
     email: string;
     password: string;
 }
 
 export interface RegisterResponse {
-    username: string;
+    name: string;
     email: string;
     password: string;
     token: string;

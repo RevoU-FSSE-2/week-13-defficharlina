@@ -1,13 +1,13 @@
 import * as yup from 'yup'
 
 export const initialValues = {
-    username: '',
+    name: '',
     email:'',
     password: ''
 }
 
 export const validationSchema = yup.object({
-    username: yup.string().required('Please Enter Your Username'),
+    name: yup.string().required('Please Enter Your Username'),
     email: yup.string().email('Invalid Email!').required('Please Enter Your Email'),
     password: yup.string().required("Please Enter Your Password")
       .matches(

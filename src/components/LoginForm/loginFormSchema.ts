@@ -1,12 +1,15 @@
 import * as yup from 'yup'
 
 export const initialValues = {
-    username: '',
+    email: '',
     password: ''
 }
 
 export const validationSchema = yup.object({
-    username: yup.string().required('Please Enter Your Username'),
+    email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
     password: yup.string().required("Please Enter Your Password")
       .matches(
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
