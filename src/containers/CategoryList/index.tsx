@@ -97,7 +97,7 @@ const CategoryList = () => {
               <>
                 {/*<Button type={'default'} onClick={() => navigate(`/category/${record.id}`)}>Detail</Button>*/}
                 <Button type={'primary'} onClick={() => navigate(`/category/edit/${record.id}`)}>Edit</Button>
-                <Button type={'primary'} color={'red'} onClick={() => removeCategory(record.id) }>Delete</Button>
+                <Button type={'primary'} onClick={() => removeCategory(record.id) } style={{ marginLeft: "5px" }}>Delete</Button>
               </>
             ),
         },

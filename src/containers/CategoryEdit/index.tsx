@@ -38,7 +38,7 @@ const CategoryEdit = () => {
 
     const onSubmit = async (values: CategoryFormProps) => {
         try {
-            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/update${id}`, {
+            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/update`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
