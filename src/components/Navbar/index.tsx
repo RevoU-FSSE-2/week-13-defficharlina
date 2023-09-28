@@ -2,6 +2,11 @@ import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
+const handleLogOut = () => {
+    localStorage.removeItem('authToken')
+    window.location.replace('/');
+  } 
+
 const items: MenuProps['items'] = [
     {
         label: 'Home',
@@ -10,6 +15,15 @@ const items: MenuProps['items'] = [
     {
         label: 'Category',
         key: '/category'
+    },
+    {
+        label: 'Profile',
+        key: '/profile'
+    },
+    {
+        label: 'Logout',
+        key: '/',
+        onClick: handleLogOut
     },
 ]
 

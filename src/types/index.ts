@@ -1,14 +1,11 @@
 export interface GetCategoryResponse {
-    categorys: Category[];
+    data: Category[];
     current_page: number;
     total_item: number;
     total_page: number;
 }
 
 export interface Category {
-    //id: number;
-    //title: string;
-    //status: boolean;
     id: string;
     name: string;
     is_active: boolean;
@@ -22,9 +19,12 @@ export interface LoginForm {
 }
 
 export interface LoginResponse {
-    email: string;
-    password: string;
-    token: string;
+    //email: string;
+    //password: string;
+    //token: string;
+    data: {
+        token: string;
+      };
 }
 
 export interface RegisterForm {
@@ -34,9 +34,10 @@ export interface RegisterForm {
 }
 
 export interface RegisterResponse {
-    name: string;
-    email: string;
-    password: string;
-    token: string;
+    data: {
+        id: string;
+        name: string;
+        email: string;
+        password: string;
+      };
 }
-

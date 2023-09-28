@@ -10,14 +10,23 @@ const CategoryEdit = () => {
 
     const { id } = useParams();
 
+    const token = localStorage.getItem('authToken')
+    console.log("Auth Token:", token)
+
     const getCategory = useCallback(
         async () => {
-            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`)
+            const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
             const response: Category = await fetching.json();
+
+            console.log("API Response:", response); // Tambahkan ini untuk melihat respons API di konsol
     
             setCategory(response)
         },
-        [id]
+        [id, token]
     )
 
     useEffect(
@@ -32,12 +41,18 @@ const CategoryEdit = () => {
             const fetching = await fetch(`https://mock-api.arikmpt.com/api/category/update${id}`, {
                 method: 'PUT',
                 headers: { 
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify({ ...values, id: id }),
             })
-            await fetching.json()
-            navigate('/category')
+            //await fetching.json()
+            //navigate('/category')
+            if (fetching.ok) {
+                navigate('/category')
+            } else {
+                console.log("Failed to update category")
+            }
         } catch (error) {
             alert(error)
         }

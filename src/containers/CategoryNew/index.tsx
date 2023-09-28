@@ -8,10 +8,13 @@ const CategoryNew = () => {
 
     const onSubmit = async (values: CategoryFormProps) => {
         try {
+            const token = localStorage.getItem('authToken')
+
             const fetching = await fetch('https://mock-api.arikmpt.com/api/category/create', {
                 method: 'POST',
                 headers: { 
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json', 
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(values)
             })

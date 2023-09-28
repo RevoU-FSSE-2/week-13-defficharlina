@@ -1,7 +1,7 @@
 import AppProvider from './Provider/AppProvider'
 // import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Home, Category, CategoryEdit, CategoryNew, Login, Register } from './pages'
+import { Home, Category, CategoryEdit, CategoryNew, Profile, Login, Register } from './pages'
 import { PublicLayout, AnotherLayout } from './layouts'
 
 function App() {
@@ -43,10 +43,10 @@ function App() {
           path: '/category/edit/:id',
           element: <CategoryEdit />
         },
-        /*{
+        {
           path: '/profile',
           element: <Profile />
-        }*/
+        }
       ]
     }
   ])

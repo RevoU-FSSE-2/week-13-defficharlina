@@ -13,10 +13,11 @@ const CategoryList = () => {
 
     const token = localStorage.getItem('authToken')
     console.log("Auth Token:", token)
-    const handleLogOut = () => {
+
+    /*const handleLogOut = () => {
         localStorage.removeItem('authToken')
-        navigate('/');
-      } 
+        window.location.replace('/');
+      }*/
 
 
     const getCategoryList = async () => {
@@ -27,10 +28,10 @@ const CategoryList = () => {
             },
           });
         const response: GetCategoryResponse = await fetching.json();
-
+        
         console.log("API Response:", response); // Tambahkan ini untuk melihat respons API di konsol
         
-        setCategorys(response.categorys ?? []);
+        setCategorys(response.data ?? []);
     };
 
     useEffect(
@@ -91,7 +92,7 @@ const CategoryList = () => {
         },
         {
             title: 'Action',
-            key: 'edit',
+            key: 'action',
             render: (_, record) => (
               <>
                 {/*<Button type={'default'} onClick={() => navigate(`/category/${record.id}`)}>Detail</Button>*/}
@@ -107,7 +108,7 @@ const CategoryList = () => {
             <h3>Daftar Category</h3>
             <Button type={'primary'} onClick={() => navigate('/category/new')}>Tambah Category Baru</Button>
             {/*<Button type={'primary'} onClick={() => navigate('/logout')}>Logout</Button>*/}
-            <Button type={'primary'} onClick={handleLogOut} danger>Log Out</Button>
+            {/*<Button type={'primary'} onClick={handleLogOut} danger>Log Out</Button>*/}
             <CategoryListComponent columns={columns} data={categorys}/>
         </>
     )
