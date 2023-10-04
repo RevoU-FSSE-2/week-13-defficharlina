@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import ProductForm from '.'
+import CategoryForm from '.'
 
 describe('Category Form Test', () => {
     const mockProps = {
@@ -7,43 +7,46 @@ describe('Category Form Test', () => {
     }
 
     test('field category name render correctly', async () => {
-        render(<ProductForm onSubmit={mockProps.onSubmit}/>)
-        const title = screen.getByText('Nama Produk')
-        const form = screen.getByPlaceholderText('Masukan nama produk')
+        render(<CategoryForm onSubmit={mockProps.onSubmit}/>)
+        const title = screen.getByText('Name')
+        const form = screen.getByPlaceholderText('Please input the category')
         expect(title).toBeDefined();
         expect(form).toBeDefined();
     })
 
-    test('field product price render correctly', async () => {
-        render(<ProductForm onSubmit={mockProps.onSubmit}/>)
-        const title = screen.getByText('Harga Produk')
-        const form = screen.getByPlaceholderText('Masukan harga produk')
+    test('field category status render correctly', async () => {
+        render(<CategoryForm onSubmit={mockProps.onSubmit}/>)
+        const title = screen.getByText('Status')
+        //const form = screen.getByPlaceholderText('Select status')
+        const status = screen.getByRole('combobox');
         expect(title).toBeDefined();
-        expect(form).toBeDefined();
+        //expect(form).toBeDefined();
+        expect(status).toBeDefined();
     })
 
     test('button submit render correctly', async () => {
-        render(<ProductForm onSubmit={mockProps.onSubmit}/>)
+        render(<CategoryForm onSubmit={mockProps.onSubmit}/>)
         const title = screen.getByText('Submit')
         expect(title).toBeDefined();
     })
 
     test('onSubmit works correctly', async () => {
-        render(<ProductForm onSubmit={mockProps.onSubmit} />);
-        const title = screen.getByPlaceholderText('Masukan nama produk') as HTMLInputElement;
-        const price = screen.getByPlaceholderText('Masukan harga produk') as HTMLInputElement;
+        render(<CategoryForm onSubmit={mockProps.onSubmit} />);
+        const title = screen.getByPlaceholderText('Please input the category') as HTMLInputElement;
+        //const status = screen.getByPlaceholderText('Select status') as HTMLInputElement;
+        const status = screen.getByRole('combobox');
         const submitButton = screen.getByText('Submit');
 
-        fireEvent.change(title, { target: { value: 'contoh produk' } });
-        fireEvent.change(price, { target: { value: '15000' } });
+        fireEvent.change(title, { target: { value: 'contoh' } });
+        fireEvent.change(status, { target: { value: true } });
 
         fireEvent.click(submitButton);
 
         await waitFor(() => {
             expect(mockProps.onSubmit).toHaveBeenCalledTimes(1);
             expect(mockProps.onSubmit).toHaveBeenCalledWith({
-                title: 'contoh produk',
-                price: '15000',
+                title: 'contoh',
+                is_active: true,
             });
         });
     })

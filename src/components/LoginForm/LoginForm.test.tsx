@@ -1,8 +1,15 @@
-//import React from "react";
-//import { render } from '@testing-library/react'
-//import LoginForm from ".";
+import React from 'react';
 import { waitFor, fireEvent, render, screen } from '@testing-library/react'
 import LoginForm from '.';
+import { useNavigate } from 'react-router-dom';
+
+jest.mock('react-router-dom', () => {
+    const navigate = jest.fn();
+    return {
+      ...jest.requireActual('react-router-dom'),
+      useNavigate: () => navigate,
+    };
+  });
 
 describe('test login form', () => {
     const mockProps = jest.fn();
@@ -12,9 +19,9 @@ describe('test login form', () => {
         expect(title).toBeDefined();
     })
 
-    test('label username render correctly', async () => {
+    test('label email render correctly', async () => {
         render(<LoginForm onSubmit={mockProps}/>)
-        const title = screen.getByText('Username')
+        const title = screen.getByText('Email')
         expect(title).toBeDefined();
     })
 
@@ -24,7 +31,7 @@ describe('test login form', () => {
         expect(title).toBeDefined();
     })
 
-    test('button submit render correctly', async () => {
+    test('button register render correctly', async () => {
         render(<LoginForm onSubmit={mockProps}/>)
         const title = screen.getByText('Submit')
         expect(title).toBeDefined();
@@ -32,21 +39,36 @@ describe('test login form', () => {
 
     test('onSubmit works correctly', async () => {
         const { getByPlaceholderText, getByText } = render(<LoginForm onSubmit={mockProps} />);
-        const usernameInput = getByPlaceholderText('Enter username') as HTMLInputElement;
-        const passwordInput = getByPlaceholderText('Enter password') as HTMLInputElement;
+        const emailInput = getByPlaceholderText('Input your email') as HTMLInputElement;
+        const passwordInput = getByPlaceholderText('Input your password') as HTMLInputElement;
         const submitButton = getByText('Submit');
 
-        fireEvent.change(usernameInput, { target: { value: 'testuser' } });
-        fireEvent.change(passwordInput, { target: { value: 'testpassword' } });
+        fireEvent.change(emailInput, { target: { value: 'dita@gmail.com' } });
+        fireEvent.change(passwordInput, { target: { value: 'Dita1234' } });
 
         fireEvent.click(submitButton);
 
         await waitFor(() => {
             expect(mockProps).toHaveBeenCalledTimes(1);
             expect(mockProps).toHaveBeenCalledWith({
-                username: 'testuser',
-                password: 'testpassword',
+                email: 'dita@gmail.com',
+                password: 'Dita1234',
             });
         });
     });
+
+    beforeEach(() => {
+        const navigate = useNavigate() as jest.Mock;
+        navigate.mockClear();
+      });
+
+      test('registration button click navigates to /register', () => {
+        const { getByText } = render(<LoginForm onSubmit={mockProps}/>);
+        const registerButton = getByText('Register');
+      
+        fireEvent.click(registerButton);
+      
+        const navigate = useNavigate();
+        expect(navigate).toHaveBeenCalledWith('/register');
+      });  
 })

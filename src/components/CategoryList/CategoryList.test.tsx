@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { ColumnsType } from 'antd/es/table';
 import { Category } from '../../types';
-import ProductList from '.';
+import CategoryList from '.';
 
 const columns: ColumnsType<Category> = [
     {
@@ -15,13 +15,13 @@ const columns: ColumnsType<Category> = [
         key: 'title',        
     },
     {
-        title: 'Price',
-        dataIndex: 'price',
-        key: 'price',
+        title: 'Status',
+        dataIndex: 'is_active',
+        key: 'is_active',
     }
 ];
 
-describe('Test Product List Component', () => {
+describe('Test Category List Component', () => {
     beforeAll(() => {
         Object.defineProperty(window, 'matchMedia', {
             writable: true,
@@ -38,7 +38,7 @@ describe('Test Product List Component', () => {
           });
     })
     test('test header column', () => {
-        render(<ProductList columns={columns} data={[]}/>)
+        render(<CategoryList columns={columns} data={[]}/>)
 
         columns.map((column) => {
             if(column.title) {

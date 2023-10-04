@@ -31,6 +31,7 @@ const RegisterForm = ({ onSubmit } : Props) => {
                         value={formMik.values.name} 
                         onChange={formMik.handleChange('name')}
                         status={formMik.errors.name && 'error'}
+                        placeholder={'Input your name'}
                     />
                     {formMik.errors.name && (
                         <Typography.Paragraph>{formMik.errors.name}</Typography.Paragraph>
@@ -43,6 +44,7 @@ const RegisterForm = ({ onSubmit } : Props) => {
                         onChange={formMik.handleChange('email')}
                         status={formMik.errors.email && 'error'}
                         type={'email'}
+                        placeholder={'Input your email'}
                     />
                     {formMik.errors.email && (
                         <Typography.Paragraph>{formMik.errors.email}</Typography.Paragraph>
@@ -55,6 +57,7 @@ const RegisterForm = ({ onSubmit } : Props) => {
                         onChange={formMik.handleChange('password')}
                         status={formMik.errors.password && 'error'}
                         type={'password'}
+                        placeholder={'Input your password'}
                     />
                     {formMik.errors.password && (
                         <Typography.Paragraph>{formMik.errors.password}</Typography.Paragraph>

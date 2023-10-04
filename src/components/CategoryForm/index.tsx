@@ -29,6 +29,7 @@ const CategoryForm = ({ onSubmit, category } : Props) => {
                         value={formMik.values.name} 
                         onChange={formMik.handleChange('name')}
                         status={formMik.errors.name && 'error'}
+                        placeholder={'Please input the category'}
                     />
                     {formMik.errors.name && (
                         <Typography.Paragraph>{formMik.errors.name}</Typography.Paragraph>
@@ -39,6 +40,7 @@ const CategoryForm = ({ onSubmit, category } : Props) => {
                 <Typography.Paragraph>{"Status"}</Typography.Paragraph>
                 <Select
                     value={formMik.values.is_active}
+                    placeholder={'Select status'}
                     onChange={(value) => formMik.setFieldValue("is_active", value)}
                     options={[
                     {
